@@ -1,0 +1,16 @@
+{
+    "extends": "../tsconfig-base.json",
+    "compilerOptions": {
+        "outDir": "../www/js/app"
+    },
+    "include": [
+        "src"
+    ],
+    "exclude": [
+        "node_modules"
+    ],
+    "files": [
+        "../libs/LogMgr.d.ts",
+        "../libs/Vec3.d.ts"
+    ]
+}
