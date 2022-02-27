@@ -17,10 +17,12 @@ declare namespace FrameWork {
         Magnitude(): number;
         LengthSquared(): number;
         Normalize(): void;
+        Clamp(): void;
     }
     function wiseProduct(x: Vec3, y: Vec3): Vec3;
     function dotProduct(x: Vec3, y: Vec3): number;
     function crossProduct(a: Vec3, b: Vec3): Vec3;
+    function multiply(a: Vec3, b: number): Vec3;
     function add(a: Vec3, b: Vec3): Vec3;
     function minus(a: Vec3, b: Vec3): Vec3;
     function divide(a: Vec3, w: number): Vec3;

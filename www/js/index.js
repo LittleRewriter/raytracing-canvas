@@ -7,6 +7,7 @@ function loadLib(url) {
 
 window.onload = function () {
     loadLib("./js/framework/Vec3.js")
+    loadLib("./js/framework/Ray.js")
     loadLib("./js/framework/LogMgr.js")
     loadLib("./js/app/CanvasHandler.js")
     loadLib("./js/app/App.js")

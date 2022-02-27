@@ -1,13 +1,6 @@
 namespace App {
     import LogMgr = FrameWork.LogMgr;
     import Vec3 = FrameWork.Vec3; 
-    import add = FrameWork.add;
-    import wiseProduct = FrameWork.wiseProduct;
-    import minus = FrameWork.minus;
-    import divide = FrameWork.divide;
-    import dotProduct = FrameWork.dotProduct;
-    import crossProduct = FrameWork.crossProduct;
-    import normalize = FrameWork.normalize;
     export class CanvasHandler {
         canvasElement: HTMLCanvasElement;
         canvasContext: CanvasRenderingContext2D;

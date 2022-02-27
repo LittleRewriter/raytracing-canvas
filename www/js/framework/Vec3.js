@@ -60,6 +60,15 @@ var FrameWork;
         Normalize() {
             this.DivideScalar(this.Magnitude());
         }
+        Clamp() {
+            this.ele.forEach(e => {
+                if (e > 255)
+                    e = 255;
+                if (e < 0)
+                    e = 0;
+                e = Math.trunc(e);
+            });
+        }
     }
     FrameWork.Vec3 = Vec3;
     function wiseProduct(x, y) {
@@ -75,6 +84,10 @@ var FrameWork;
         return new Vec3(a.y * b.z - a.z * b.y, a.z * b.x - a.x * b.z, a.x * b.y - a.y * b.x);
     }
     FrameWork.crossProduct = crossProduct;
+    function multiply(a, b) {
+        return new Vec3(a.x * b, a.y * b, a.z * b);
+    }
+    FrameWork.multiply = multiply;
     function add(a, b) {
         return new Vec3(a.x + b.x, a.y + b.y, a.z + b.z);
     }

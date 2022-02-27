@@ -54,6 +54,13 @@ namespace FrameWork {
         Normalize() {
             this.DivideScalar(this.Magnitude())
         }
+        Clamp() {
+            this.ele.forEach(e => {
+                if (e > 255) e = 255;
+                if (e < 0) e = 0;
+                e = Math.trunc(e);
+            })
+        }
     }
     export function wiseProduct(x: Vec3, y: Vec3): Vec3 {
         let newVec = new Vec3(x.x * y.x, x.y * y.y, x.z * y.z);
@@ -68,6 +75,9 @@ namespace FrameWork {
             a.z * b.x - a.x * b.z,
             a.x * b.y - a.y * b.x
         )
+    }
+    export function multiply(a: Vec3, b: number): Vec3 {
+        return new Vec3(a.x * b, a.y * b, a.z * b);
     }
     export function add(a: Vec3, b: Vec3): Vec3 {
         return new Vec3(a.x + b.x, a.y + b.y, a.z + b.z);
