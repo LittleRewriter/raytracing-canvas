@@ -28,15 +28,20 @@ var App;
             scene.AddObject(sphere2);
             for (var i = 0; i < App_1.height; ++i) {
                 for (var j = 0; j < App_1.width; ++j) {
-                    var hrat = i / (App_1.height - 1);
-                    var wrat = j / (App_1.width - 1);
-                    var newvec = add(ld_vec, new Vec3(App_1.view_w * wrat, App_1.view_h * hrat, 0));
-                    var ray = new Ray(App_1.origin, newvec);
-                    ray.dir.Normalize();
-                    var hit = scene.HitObjects(ray);
-                    var col = scene.GetColor(newvec, hit);
-                    col.Clamp();
-                    handler.SetPixel(i, j, col);
+                    var sumcol = new Vec3(0, 0, 0);
+                    for (var spp = 0; spp < App_1.MSAA_amount; ++spp) {
+                        var hrat = (i + Math.random()) / (App_1.height - 1);
+                        var wrat = (j + Math.random()) / (App_1.width - 1);
+                        var newvec = add(ld_vec, new Vec3(App_1.view_w * wrat, App_1.view_h * hrat, 0));
+                        var ray = new Ray(App_1.origin, newvec);
+                        ray.dir.Normalize();
+                        var hit = scene.HitObjects(ray);
+                        var col = scene.GetColor(newvec, hit);
+                        col.Clamp();
+                        sumcol = add(sumcol, col);
+                    }
+                    sumcol.DivideScalar(App_1.MSAA_amount);
+                    handler.SetPixel(i, j, sumcol);
                 }
             }
             handler.UpdateFrame();

@@ -45,15 +45,20 @@ namespace App {
             // fill the color in canvas
             for (var i = 0; i < height; ++i) {
                 for (var j = 0; j < width; ++j) {
-                    var hrat = i / (height - 1);
-                    var wrat = j / (width - 1);
-                    var newvec = add(ld_vec, new Vec3(view_w * wrat, view_h * hrat, 0));
-                    var ray = new Ray(origin, newvec);
-                    ray.dir.Normalize();
-                    var hit = scene.HitObjects(ray);
-                    var col = scene.GetColor(newvec, hit);
-                    col.Clamp();
-                    handler.SetPixel(i, j, col);
+                    var sumcol = new Vec3(0, 0, 0);
+                    for (var spp = 0; spp < MSAA_amount; ++spp) {
+                        var hrat = (i + Math.random()) / (height - 1);
+                        var wrat = (j + Math.random()) / (width - 1);
+                        var newvec = add(ld_vec, new Vec3(view_w * wrat, view_h * hrat, 0));
+                        var ray = new Ray(origin, newvec);
+                        ray.dir.Normalize();
+                        var hit = scene.HitObjects(ray);
+                        var col = scene.GetColor(newvec, hit);
+                        col.Clamp();
+                        sumcol = add(sumcol, col);
+                    }
+                    sumcol.DivideScalar(MSAA_amount);
+                    handler.SetPixel(i, j, sumcol);
                 }
             }
 
