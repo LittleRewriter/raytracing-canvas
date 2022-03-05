@@ -7,10 +7,10 @@ var FrameWork;
             this.radius = radius;
             this.material = material;
         }
-        getNormal(p) {
+        GetNormal(p) {
             return FrameWork.normalize(FrameWork.minus(p, this.center));
         }
-        hit(ray, t_min = 0, t_max = 99999999) {
+        Hit(ray, t_min = 0, t_max = 99999999) {
             var a = FrameWork.dotProduct(ray.dir, ray.dir);
             var aMinusC = FrameWork.minus(ray.origin, this.center);
             var b = 2 * FrameWork.dotProduct(ray.dir, aMinusC);
@@ -22,15 +22,17 @@ var FrameWork;
             var t2 = (-b + Math.sqrt(delta)) / 2 * a;
             if (t1 >= t_min && t1 <= t_max) {
                 var np = FrameWork.add(ray.origin, FrameWork.multiply(ray.dir, t1));
-                var normal = this.getNormal(np);
-                var ref = this.material.reflect(np, normal);
-                return new FrameWork.Hit(np, normal, t1, ref);
+                var normal = this.GetNormal(np);
+                var col = this.material.Diffuse(np);
+                var ref = this.material.Reflect(np, normal, ray);
+                return new FrameWork.Hit(np, normal, t1, col, ref);
             }
             else if (t2 >= t_min && t2 <= t_max) {
                 var np = FrameWork.add(ray.origin, FrameWork.multiply(ray.dir, t2));
-                var normal = this.getNormal(np);
-                var ref = this.material.reflect(np, normal);
-                return new FrameWork.Hit(np, normal, t2, ref);
+                var normal = this.GetNormal(np);
+                var col = this.material.Diffuse(np);
+                var ref = this.material.Reflect(np, normal, ray);
+                return new FrameWork.Hit(np, normal, t2, col, ref);
             }
             return null;
         }

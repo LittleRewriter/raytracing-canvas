@@ -2,10 +2,11 @@
 var FrameWork;
 (function (FrameWork) {
     class Hit {
-        constructor(p, N, t, O) {
+        constructor(p, N, t, C, O) {
             this.p = p;
             this.N = N;
             this.t = t;
+            this.C = C;
             this.O = O;
         }
     }

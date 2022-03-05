@@ -29,7 +29,7 @@ namespace FrameWork {
             return add(add(multiply(B, ray.x), multiply(C, ray.y)), multiply(N, ray.z));
         }
 
-        diffuse(x: Vec3): Vec3 {
+        Diffuse(x: Vec3): Vec3 {
             return this.color;
         }
 
@@ -49,7 +49,7 @@ namespace FrameWork {
             }
         }
 
-        reflect(x: Vec3, N: Vec3): Ray {
+        Reflect(x: Vec3, N: Vec3, L: Ray): Ray | null {
             var hem = this.randHemisphere();
             var dir = this.normToWorld(hem, N);
             //var dir = this.unitSample(N);

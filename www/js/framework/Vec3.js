@@ -51,6 +51,10 @@ var FrameWork;
             this.ele[2] = -this.ele[2];
             this.UpdateSubEles();
         }
+        IsZero() {
+            var eps = 1e-6;
+            return this.ele[0] < eps && this.ele[1] < eps && this.ele[2] < eps;
+        }
         DivideScalar(o) {
             this.ele[0] /= o;
             this.ele[1] /= o;

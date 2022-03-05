@@ -4,8 +4,8 @@ declare namespace FrameWork {
         constructor(color: Vec3);
         private randHemisphere;
         private normToWorld;
-        diffuse(x: Vec3): Vec3;
+        Diffuse(x: Vec3): Vec3;
         private unitSample;
-        reflect(x: Vec3, N: Vec3): Ray;
+        Reflect(x: Vec3, N: Vec3, L: Ray): Ray | null;
     }
 }

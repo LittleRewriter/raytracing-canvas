@@ -14,6 +14,7 @@ declare namespace FrameWork {
         MinusVec(o: Vec3): void;
         Multiply(o: number): void;
         Negative(): void;
+        IsZero(): boolean;
         DivideScalar(o: number): void;
         Magnitude(): number;
         LengthSquared(): number;

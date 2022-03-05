@@ -8,10 +8,10 @@ namespace FrameWork {
             this.radius = radius;
             this.material = material;
         }
-        getNormal(p: Vec3) {
+        GetNormal(p: Vec3) {
             return normalize(minus(p, this.center));
         }
-        hit(ray: Ray, t_min: number = 0, t_max: number = 99999999): Hit | null {
+        Hit(ray: Ray, t_min: number = 0, t_max: number = 99999999): Hit | null {
             var a = dotProduct(ray.dir, ray.dir);
             var aMinusC = minus(ray.origin, this.center);
             var b = 2 * dotProduct(ray.dir, aMinusC);
@@ -22,14 +22,16 @@ namespace FrameWork {
             var t2 = (-b + Math.sqrt(delta)) / 2 * a;
             if (t1 >= t_min && t1 <= t_max) {
                 var np = add(ray.origin, multiply(ray.dir, t1));
-                var normal = this.getNormal(np);
-                var ref = this.material.reflect(np, normal);
-                return new Hit(np, normal, t1, ref);
+                var normal = this.GetNormal(np);
+                var col = this.material.Diffuse(np);
+                var ref = this.material.Reflect(np, normal, ray);
+                return new Hit(np, normal, t1, col, ref);
             } else if (t2 >= t_min && t2 <= t_max) {
                 var np = add(ray.origin, multiply(ray.dir, t2));
-                var normal = this.getNormal(np);
-                var ref = this.material.reflect(np, normal);
-                return new Hit(np, normal, t2, ref);
+                var normal = this.GetNormal(np);
+                var col = this.material.Diffuse(np);
+                var ref = this.material.Reflect(np, normal, ray);
+                return new Hit(np, normal, t2, col, ref);
             }
             return null;
         }

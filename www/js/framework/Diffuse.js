@@ -26,7 +26,7 @@ var FrameWork;
             var B = FrameWork.crossProduct(C, N);
             return FrameWork.add(FrameWork.add(FrameWork.multiply(B, ray.x), FrameWork.multiply(C, ray.y)), FrameWork.multiply(N, ray.z));
         }
-        diffuse(x) {
+        Diffuse(x) {
             return this.color;
         }
         unitSample(N) {
@@ -46,7 +46,7 @@ var FrameWork;
                 return v;
             }
         }
-        reflect(x, N) {
+        Reflect(x, N, L) {
             var hem = this.randHemisphere();
             var dir = this.normToWorld(hem, N);
             dir.Normalize();

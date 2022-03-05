@@ -1,6 +1,6 @@
 namespace FrameWork {
     export interface Material {
-        diffuse(x: Vec3): Vec3;
-        reflect(x: Vec3, N: Vec3): Ray;
+        Diffuse(x: Vec3): Vec3;
+        Reflect(x: Vec3, N: Vec3, L: Ray): Ray | null;
     }
 }

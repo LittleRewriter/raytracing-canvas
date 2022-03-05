@@ -4,7 +4,7 @@ declare namespace FrameWork {
         radius: number;
         material: Material;
         constructor(center: Vec3, radius: number, material: Material);
-        getNormal(p: Vec3): Vec3;
-        hit(ray: Ray, t_min?: number, t_max?: number): Hit | null;
+        GetNormal(p: Vec3): Vec3;
+        Hit(ray: Ray, t_min?: number, t_max?: number): Hit | null;
     }
 }
