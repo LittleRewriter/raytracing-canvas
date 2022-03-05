@@ -1,19 +1,17 @@
 {
     "extends": "../tsconfig-base.json",
     "compilerOptions": {
-        "outDir": "../www/js/app"
+        "outDir": "../www/js/app",
+        "declarationDir": "../libs/app"
     },
     "include": [
-        "src"
+        "src",
+        "../libs/framework"
     ],
     "exclude": [
         "node_modules"
     ],
     "files": [
-        "../libs/LogMgr.d.ts",
-        "../libs/Vec3.d.ts",
-        "../libs/Ray.d.ts",
-        "../libs/Hit.d.ts",
-        "../libs/Sphere.d.ts"
+        
     ]
 }

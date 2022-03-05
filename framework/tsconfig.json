@@ -1,7 +1,8 @@
 {
     "extends": "../tsconfig-base.json",
     "compilerOptions": {
-        "outDir": "../www/js/framework"
+        "outDir": "../www/js/framework",
+        "declarationDir": "../libs/framework"
     },
     "include": [
         "src"

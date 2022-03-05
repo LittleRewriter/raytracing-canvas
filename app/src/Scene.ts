@@ -7,8 +7,8 @@ namespace App {
     import multiply = FrameWork.multiply;
     
     // color of sky to lerp
-    const coldown = new Vec3(219, 231, 234);
-    const colup = new Vec3(108, 166, 251);
+    const coldown = new Vec3(255, 255, 255);
+    const colup = new Vec3(128, 179, 255);
 
     export class Scene {
         objs: Object[] = []
@@ -31,18 +31,20 @@ namespace App {
         // Calculate the ambient color for sky
         private ambient(scenePos: Vec3): Vec3 {
             var y = scenePos.y;
-            var t = (y + view_h / 2) / view_h;
+            var t = (y + 1.0) * .5;
             return add(multiply(coldown, 1 - t), multiply(colup, t));
         }
-
-        GetColor(scenePos: Vec3,hit: Hit|null):Vec3 {
-            if (hit === null) {
-                return this.ambient(scenePos);
-            } else {
-                var ncolor = multiply(hit.N, 255.999);
-                ncolor.Clamp();
-                return ncolor;
+        GetColor(ray: Ray, dep: number): Vec3 {
+            var hit = this.HitObjects(ray, .01);
+            if (dep < 0) {
+                return new Vec3(0, 0, 0);
             }
+            if (hit !== null) {
+                var nr = hit.O;
+                return multiply(this.GetColor(nr, dep - 1), .5);
+            }
+            return this.ambient(ray.dir);
         }
+
     }
 }

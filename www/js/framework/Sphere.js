@@ -2,9 +2,10 @@
 var FrameWork;
 (function (FrameWork) {
     class Sphere {
-        constructor(center, radius) {
+        constructor(center, radius, material) {
             this.center = center;
             this.radius = radius;
+            this.material = material;
         }
         getNormal(p) {
             return FrameWork.normalize(FrameWork.minus(p, this.center));
@@ -22,12 +23,14 @@ var FrameWork;
             if (t1 >= t_min && t1 <= t_max) {
                 var np = FrameWork.add(ray.origin, FrameWork.multiply(ray.dir, t1));
                 var normal = this.getNormal(np);
-                return new FrameWork.Hit(np, normal, t1);
+                var ref = this.material.reflect(np, normal);
+                return new FrameWork.Hit(np, normal, t1, ref);
             }
             else if (t2 >= t_min && t2 <= t_max) {
                 var np = FrameWork.add(ray.origin, FrameWork.multiply(ray.dir, t2));
                 var normal = this.getNormal(np);
-                return new FrameWork.Hit(np, normal, t2);
+                var ref = this.material.reflect(np, normal);
+                return new FrameWork.Hit(np, normal, t2, ref);
             }
             return null;
         }

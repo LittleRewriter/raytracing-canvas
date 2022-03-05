@@ -2,9 +2,11 @@ namespace FrameWork {
     export class Sphere implements Object {
         center: Vec3;
         radius: number;
-        constructor(center: Vec3, radius: number) {
+        material: Material;
+        constructor(center: Vec3, radius: number, material: Material) {
             this.center = center;
             this.radius = radius;
+            this.material = material;
         }
         getNormal(p: Vec3) {
             return normalize(minus(p, this.center));
@@ -21,11 +23,13 @@ namespace FrameWork {
             if (t1 >= t_min && t1 <= t_max) {
                 var np = add(ray.origin, multiply(ray.dir, t1));
                 var normal = this.getNormal(np);
-                return new Hit(np, normal, t1);
+                var ref = this.material.reflect(np, normal);
+                return new Hit(np, normal, t1, ref);
             } else if (t2 >= t_min && t2 <= t_max) {
                 var np = add(ray.origin, multiply(ray.dir, t2));
                 var normal = this.getNormal(np);
-                return new Hit(np, normal, t2);
+                var ref = this.material.reflect(np, normal);
+                return new Hit(np, normal, t2, ref);
             }
             return null;
         }

@@ -5,7 +5,6 @@
       "strict": true,
       "sourceMap": true,
       "removeComments": true,
-      "declaration": true,
-      "declarationDir": "./libs/"
+      "declaration": true
     }
 }

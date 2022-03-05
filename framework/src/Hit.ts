@@ -3,10 +3,12 @@ namespace FrameWork {
         p: Vec3;
         N: Vec3;
         t: number;
-        constructor(p: Vec3, N: Vec3, t: number) {
+        O: Ray;
+        constructor(p: Vec3, N: Vec3, t: number, O: Ray) {
             this.p = p;
             this.N = N;
             this.t = t;
+            this.O = O;
         }
     }
     export interface Object {

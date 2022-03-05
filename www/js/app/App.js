@@ -1,9 +1,11 @@
 "use strict";
 var App;
 (function (App_1) {
+    var LogMgr = FrameWork.LogMgr;
     var Vec3 = FrameWork.Vec3;
     var Ray = FrameWork.Ray;
     var Sphere = FrameWork.Sphere;
+    var Diffuse = FrameWork.DiffuseMat;
     var add = FrameWork.add;
     var minus = FrameWork.minus;
     App_1.width = 400;
@@ -13,7 +15,8 @@ var App;
     App_1.view_h = App_1.view_w / App_1.asp_ratio;
     App_1.dep = 1.0;
     App_1.origin = new Vec3(0, 0, 0);
-    App_1.MSAA_amount = 30;
+    App_1.MSAA_amount = 40;
+    App_1.bounce_deep = 30;
     class App {
         static main() {
             var canvas = document.getElementsByTagName("canvas")[0];
@@ -22,8 +25,8 @@ var App;
             handler.CreateFrame();
             const ld_vec = minus(App_1.origin, new Vec3(App_1.view_w / 2, App_1.view_h / 2, App_1.dep));
             var scene = new App_1.Scene();
-            var sphere = new Sphere(new Vec3(0, 0, -1), .3);
-            var sphere2 = new Sphere(new Vec3(0, -100.5, -1), 100);
+            var sphere = new Sphere(new Vec3(0, 0, -1.5), .5, new Diffuse(new Vec3(255, 255, 255)));
+            var sphere2 = new Sphere(new Vec3(0, -100.5, -1.5), 100, new Diffuse(new Vec3(255, 255, 255)));
             scene.AddObject(sphere);
             scene.AddObject(sphere2);
             for (var i = 0; i < App_1.height; ++i) {
@@ -35,13 +38,17 @@ var App;
                         var newvec = add(ld_vec, new Vec3(App_1.view_w * wrat, App_1.view_h * hrat, 0));
                         var ray = new Ray(App_1.origin, newvec);
                         ray.dir.Normalize();
-                        var hit = scene.HitObjects(ray);
-                        var col = scene.GetColor(newvec, hit);
+                        var col = scene.GetColor(ray, App_1.bounce_deep);
                         col.Clamp();
                         sumcol = add(sumcol, col);
                     }
                     sumcol.DivideScalar(App_1.MSAA_amount);
+                    sumcol.GammaCorrelation();
+                    sumcol.Clamp();
                     handler.SetPixel(i, j, sumcol);
+                }
+                if (i % 10 === 0) {
+                    LogMgr.info(i);
                 }
             }
             handler.UpdateFrame();

@@ -3,6 +3,7 @@ namespace App {
     import Vec3 = FrameWork.Vec3;
     import Ray = FrameWork.Ray;
     import Sphere = FrameWork.Sphere;
+    import Diffuse = FrameWork.DiffuseMat;
     import add = FrameWork.add;
     import wiseProduct = FrameWork.wiseProduct;
     import minus = FrameWork.minus;
@@ -22,9 +23,10 @@ namespace App {
     // camera position
     export const dep = 1.0;
     export const origin = new Vec3(0, 0, 0);
-    export const MSAA_amount = 30;
+    export const MSAA_amount = 40;
+    export const bounce_deep = 30;
     export class App {
-        
+
         public static main() {
             // initialize the canvas
             var canvas = document.getElementsByTagName("canvas")[0];
@@ -37,8 +39,8 @@ namespace App {
 
             // create scene and add
             var scene = new Scene();
-            var sphere = new Sphere(new Vec3(0, 0, -1), .3);
-            var sphere2 = new Sphere(new Vec3(0, -100.5, -1), 100);
+            var sphere = new Sphere(new Vec3(0, 0, -1.5), .5, new Diffuse(new Vec3(255,255,255)));
+            var sphere2 = new Sphere(new Vec3(0, -100.5, -1.5), 100, new Diffuse(new Vec3(255,255,255)));
             scene.AddObject(sphere);
             scene.AddObject(sphere2);
             
@@ -52,16 +54,19 @@ namespace App {
                         var newvec = add(ld_vec, new Vec3(view_w * wrat, view_h * hrat, 0));
                         var ray = new Ray(origin, newvec);
                         ray.dir.Normalize();
-                        var hit = scene.HitObjects(ray);
-                        var col = scene.GetColor(newvec, hit);
+                        var col = scene.GetColor(ray, bounce_deep);
                         col.Clamp();
                         sumcol = add(sumcol, col);
                     }
                     sumcol.DivideScalar(MSAA_amount);
+                    sumcol.GammaCorrelation();
+                    sumcol.Clamp();
                     handler.SetPixel(i, j, sumcol);
                 }
+                if (i % 10 === 0) {
+                    LogMgr.info(i);
+                }
             }
-
             // update canvas status
             handler.UpdateFrame();
         }

@@ -7,7 +7,8 @@ declare namespace App {
     const view_h: number;
     const dep = 1;
     const origin: Vec3;
-    const MSAA_amount = 30;
+    const MSAA_amount = 40;
+    const bounce_deep = 30;
     class App {
         static main(): void;
     }

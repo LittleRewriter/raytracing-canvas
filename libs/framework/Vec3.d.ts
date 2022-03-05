@@ -13,10 +13,12 @@ declare namespace FrameWork {
         AddVec(o: Vec3): void;
         MinusVec(o: Vec3): void;
         Multiply(o: number): void;
+        Negative(): void;
         DivideScalar(o: number): void;
         Magnitude(): number;
         LengthSquared(): number;
         Normalize(): void;
+        GammaCorrelation(): void;
         Clamp(): void;
     }
     function wiseProduct(x: Vec3, y: Vec3): Vec3;

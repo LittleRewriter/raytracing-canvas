@@ -45,6 +45,12 @@ var FrameWork;
             this.ele[2] *= o;
             this.UpdateSubEles();
         }
+        Negative() {
+            this.ele[0] = -this.ele[0];
+            this.ele[1] = -this.ele[1];
+            this.ele[2] = -this.ele[2];
+            this.UpdateSubEles();
+        }
         DivideScalar(o) {
             this.ele[0] /= o;
             this.ele[1] /= o;
@@ -59,6 +65,12 @@ var FrameWork;
         }
         Normalize() {
             this.DivideScalar(this.Magnitude());
+        }
+        GammaCorrelation() {
+            this.ele[0] = Math.pow(this.ele[0] / 255.999, 1 / 2.2) * 255.999;
+            this.ele[1] = Math.pow(this.ele[1] / 255.999, 1 / 2.2) * 255.999;
+            this.ele[2] = Math.pow(this.ele[2] / 255.999, 1 / 2.2) * 255.999;
+            this.UpdateSubEles();
         }
         Clamp() {
             this.ele.forEach(e => {

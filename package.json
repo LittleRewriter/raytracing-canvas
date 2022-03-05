@@ -1,0 +1,20 @@
+{
+  "name": "weekend",
+  "version": "1.0.0",
+  "description": "A toy raytracer implemented by canvas",
+  "main": "index.js",
+  "scripts": {
+    "compile": "cd framework && tsc && cd .. && cd app && tsc && cd ..",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LittleRewriter/raytracing-canvas.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LittleRewriter/raytracing-canvas/issues"
+  },
+  "homepage": "https://github.com/LittleRewriter/raytracing-canvas#readme"
+}

@@ -8,6 +8,6 @@ declare namespace App {
         AddObject(obj: Object): void;
         HitObjects(ray: Ray, t_min?: number, t_max?: number): Hit | null;
         private ambient;
-        GetColor(scenePos: Vec3, hit: Hit | null): Vec3;
+        GetColor(ray: Ray, dep: number): Vec3;
     }
 }
