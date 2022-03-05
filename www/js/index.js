@@ -12,6 +12,7 @@ window.onload = function () {
     loadLib("./js/framework/Hit.js")
     loadLib("./js/framework/Material.js")
     loadLib("./js/framework/Mirror.js")
+    loadLib("./js/framework/Glossy.js")
     loadLib("./js/framework/Diffuse.js")
     loadLib("./js/framework/Sphere.js")
     loadLib("./js/app/CanvasHandler.js")

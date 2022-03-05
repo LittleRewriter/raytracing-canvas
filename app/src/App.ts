@@ -4,6 +4,7 @@ namespace App {
     import Ray = FrameWork.Ray;
     import Sphere = FrameWork.Sphere;
     import Mirror = FrameWork.Mirror;
+    import Glossy = FrameWork.GlossyMat;
     import Diffuse = FrameWork.DiffuseMat;
     import add = FrameWork.add;
     import wiseProduct = FrameWork.wiseProduct;
@@ -43,8 +44,8 @@ namespace App {
 
             var mat_ground = new Diffuse(new Vec3(.8, .8, 0));
             var mat_center = new Diffuse(new Vec3(.7, .3, .3));
-            var mat_left = new Mirror(new Vec3(.8, .8, .8));
-            var mat_right = new Mirror(new Vec3(.8, .6, .2));
+            var mat_left = new Glossy(new Vec3(.8, .8, .8), 20);
+            var mat_right = new Glossy(new Vec3(.8, .6, .2), 100);
 
             var ground = new Sphere(new Vec3(0, -100.5, -1.5), 100, mat_ground);
             var sph_left = new Sphere(new Vec3(-1, 0, -1.5), .5, mat_left);
