@@ -38,6 +38,15 @@ namespace FrameWork {
         }
     }
 
+    export function sampleDisk(): Vec3 {
+        while (true) {
+            var x = Math.random();
+            var y = Math.random();
+            if (x * x + y * y < 1)
+                return new Vec3(x, y, 0);
+        }
+    }
+
     export function randCone(theta: number):Vec3 {
         var U1 = Math.random(), U2 = Math.random();
         var hradt = theta / 360 * Math.PI;

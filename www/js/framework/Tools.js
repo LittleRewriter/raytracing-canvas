@@ -42,6 +42,15 @@ var FrameWork;
         }
     }
     FrameWork.unitSample = unitSample;
+    function sampleDisk() {
+        while (true) {
+            var x = Math.random();
+            var y = Math.random();
+            if (x * x + y * y < 1)
+                return new FrameWork.Vec3(x, y, 0);
+        }
+    }
+    FrameWork.sampleDisk = sampleDisk;
     function randCone(theta) {
         var U1 = Math.random(), U2 = Math.random();
         var hradt = theta / 360 * Math.PI;

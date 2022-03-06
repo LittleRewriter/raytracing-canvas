@@ -5,7 +5,8 @@ declare namespace FrameWork {
         field_of_view?: number;
         aspect_ratio?: number;
         vup?: Vec3;
-        depth_of_view?: number;
+        focus_distance?: number;
+        aperture?: number;
     }
     export class Camera {
         pos: Vec3;
@@ -17,7 +18,10 @@ declare namespace FrameWork {
         vh: number;
         hor: Vec3;
         ver: Vec3;
+        hor_axis: Vec3;
+        ver_axis: Vec3;
         left_down: Vec3;
+        len_radius: number;
         constructor(prop?: CameraProps);
         GetRay(u: number, v: number): Ray;
     }

@@ -43,7 +43,9 @@ namespace App {
             var camera = new Camera({
                 look_origin: new Vec3(-2, 2, 1),
                 look_at: new Vec3(-1, 0, 1),
-                field_of_view: 120
+                field_of_view: 120,
+                focus_distance: new Vec3(2, -2, 2.5).Magnitude(),
+                aperture: .2
             });
 
             // create scene and add
