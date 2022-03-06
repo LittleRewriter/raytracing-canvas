@@ -5,14 +5,11 @@ var FrameWork;
         constructor(color) {
             this.color = color;
         }
-        reflectRay(L, N) {
-            return FrameWork.minus(L, FrameWork.multiply(N, 2 * FrameWork.dotProduct(L, N)));
-        }
         Diffuse(x) {
             return this.color;
         }
         Reflect(x, N, L) {
-            var nRay = this.reflectRay(L.dir, N);
+            var nRay = FrameWork.reflectRay(L.dir, N);
             nRay.Normalize();
             if (FrameWork.dotProduct(nRay, N) < 0)
                 return null;

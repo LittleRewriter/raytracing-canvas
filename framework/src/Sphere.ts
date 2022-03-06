@@ -9,7 +9,9 @@ namespace FrameWork {
             this.material = material;
         }
         GetNormal(p: Vec3) {
-            return normalize(minus(p, this.center));
+            var n = normalize(minus(p, this.center));
+            if (this.radius < 0) n.Negative();
+            return n;
         }
         Hit(ray: Ray, t_min: number = 0, t_max: number = 99999999): Hit | null {
             var a = dotProduct(ray.dir, ray.dir);

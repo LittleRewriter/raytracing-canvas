@@ -8,7 +8,10 @@ var FrameWork;
             this.material = material;
         }
         GetNormal(p) {
-            return FrameWork.normalize(FrameWork.minus(p, this.center));
+            var n = FrameWork.normalize(FrameWork.minus(p, this.center));
+            if (this.radius < 0)
+                n.Negative();
+            return n;
         }
         Hit(ray, t_min = 0, t_max = 99999999) {
             var a = FrameWork.dotProduct(ray.dir, ray.dir);

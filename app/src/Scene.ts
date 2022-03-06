@@ -8,8 +8,8 @@ namespace App {
     import wiseProduct = FrameWork.wiseProduct;
     
     // color of sky to lerp
-    const coldown = new Vec3(255, 255, 255);
-    const colup = new Vec3(128, 179, 255);
+    const coldown = new Vec3(1, 1, 1);
+    const colup = new Vec3(0.5, 0.7, 1);
 
     export class Scene {
         objs: Object[] = []
@@ -36,7 +36,7 @@ namespace App {
             return add(multiply(coldown, 1 - t), multiply(colup, t));
         }
         GetColor(ray: Ray, dep: number): Vec3 {
-            var hit = this.HitObjects(ray, .01);
+            var hit = this.HitObjects(ray, .001);
             if (dep < 0) {
                 return new Vec3(0, 0, 0);
             }

@@ -19,7 +19,7 @@ declare namespace FrameWork {
         Magnitude(): number;
         LengthSquared(): number;
         Normalize(): void;
-        GammaCorrelation(): void;
+        GammaCorrection(): void;
         Clamp(): void;
     }
     function wiseProduct(x: Vec3, y: Vec3): Vec3;

@@ -4,6 +4,7 @@ namespace App {
     import Ray = FrameWork.Ray;
     import Sphere = FrameWork.Sphere;
     import Mirror = FrameWork.Mirror;
+    import Glass = FrameWork.RealGlassMat;
     import Glossy = FrameWork.GlossyMat;
     import Diffuse = FrameWork.DiffuseMat;
     import add = FrameWork.add;
@@ -25,7 +26,7 @@ namespace App {
     // camera position
     export const dep = 1.0;
     export const origin = new Vec3(0, 0, 0);
-    export const MSAA_amount = 40;
+    export const MSAA_amount = 70;
     export const bounce_deep = 30;
     export class App {
 
@@ -43,17 +44,22 @@ namespace App {
             var scene = new Scene();
 
             var mat_ground = new Diffuse(new Vec3(.8, .8, 0));
-            var mat_center = new Diffuse(new Vec3(.7, .3, .3));
-            var mat_left = new Glossy(new Vec3(.8, .8, .8), 20);
+            //var mat_center = new Diffuse(new Vec3(.7, .3, .3));
+            //var mat_left = new Glossy(new Vec3(.8, .8, .8), 20);
+            //var mat_center = new Glass(1.5);
+            var mat_center = new Mirror(new Vec3(1.0, 1.0, 1.0));
+            var mat_left = new Glass(1.5);
             var mat_right = new Glossy(new Vec3(.8, .6, .2), 100);
 
             var ground = new Sphere(new Vec3(0, -100.5, -1.5), 100, mat_ground);
             var sph_left = new Sphere(new Vec3(-1, 0, -1.5), .5, mat_left);
+            var sph_left_bub = new Sphere(new Vec3(-1, 0, -1.5), -.4, mat_left);
             var sph_right = new Sphere(new Vec3(1, 0, -1.5), .5, mat_right);
             var sph_mid = new Sphere(new Vec3(0, 0, -1.5), .5, mat_center);
 
             scene.AddObject(ground);
             scene.AddObject(sph_left);
+            scene.AddObject(sph_left_bub);
             scene.AddObject(sph_mid);
             scene.AddObject(sph_right);
             
@@ -72,8 +78,9 @@ namespace App {
                         sumcol = add(sumcol, col);
                     }
                     sumcol.DivideScalar(MSAA_amount);
-                    sumcol.GammaCorrelation();
+                    sumcol.GammaCorrection();
                     sumcol.Clamp();
+                    sumcol.Multiply(255.999);
                     handler.SetPixel(i, j, sumcol);
                 }
                 if (i % 10 === 0) {

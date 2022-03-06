@@ -5,8 +5,8 @@ var App;
     var add = FrameWork.add;
     var multiply = FrameWork.multiply;
     var wiseProduct = FrameWork.wiseProduct;
-    const coldown = new Vec3(255, 255, 255);
-    const colup = new Vec3(128, 179, 255);
+    const coldown = new Vec3(1, 1, 1);
+    const colup = new Vec3(0.5, 0.7, 1);
     class Scene {
         constructor() {
             this.objs = [];
@@ -32,7 +32,7 @@ var App;
             return add(multiply(coldown, 1 - t), multiply(colup, t));
         }
         GetColor(ray, dep) {
-            var hit = this.HitObjects(ray, .01);
+            var hit = this.HitObjects(ray, .001);
             if (dep < 0) {
                 return new Vec3(0, 0, 0);
             }

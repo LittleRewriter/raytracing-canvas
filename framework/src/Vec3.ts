@@ -64,15 +64,15 @@ namespace FrameWork {
         Normalize() {
             this.DivideScalar(this.Magnitude())
         }
-        GammaCorrelation() {
-            this.ele[0] = Math.pow(this.ele[0] / 255.999, 1 / 2.2) * 255.999;
-            this.ele[1] = Math.pow(this.ele[1] / 255.999, 1 / 2.2) * 255.999;
-            this.ele[2] = Math.pow(this.ele[2] / 255.999, 1 / 2.2) * 255.999;
+        GammaCorrection() {
+            this.ele[0] = Math.pow(this.ele[0], 1 / 2.2);
+            this.ele[1] = Math.pow(this.ele[1], 1 / 2.2);
+            this.ele[2] = Math.pow(this.ele[2], 1 / 2.2);
             this.UpdateSubEles();
         }
         Clamp() {
             this.ele.forEach(e => {
-                if (e > 255) e = 255;
+                if (e > 1) e = 1;
                 if (e < 0) e = 0;
                 e = Math.trunc(e);
             })
