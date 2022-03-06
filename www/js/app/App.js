@@ -3,14 +3,13 @@ var App;
 (function (App_1) {
     var LogMgr = FrameWork.LogMgr;
     var Vec3 = FrameWork.Vec3;
-    var Ray = FrameWork.Ray;
+    var Camera = FrameWork.Camera;
     var Sphere = FrameWork.Sphere;
     var Mirror = FrameWork.Mirror;
     var Glass = FrameWork.RealGlassMat;
     var Glossy = FrameWork.GlossyMat;
     var Diffuse = FrameWork.DiffuseMat;
     var add = FrameWork.add;
-    var minus = FrameWork.minus;
     App_1.width = 400;
     App_1.height = 300;
     App_1.asp_ratio = App_1.width / App_1.height;
@@ -26,7 +25,11 @@ var App;
             var handler = new App_1.CanvasHandler(canvas);
             handler.SetCanvasSize(App_1.width, App_1.height);
             handler.CreateFrame();
-            const ld_vec = minus(App_1.origin, new Vec3(App_1.view_w / 2, App_1.view_h / 2, App_1.dep));
+            var camera = new Camera({
+                look_origin: new Vec3(-2, 2, 1),
+                look_at: new Vec3(-1, 0, 1),
+                field_of_view: 120
+            });
             var scene = new App_1.Scene();
             var mat_ground = new Diffuse(new Vec3(.8, .8, 0));
             var mat_center = new Mirror(new Vec3(1.0, 1.0, 1.0));
@@ -48,8 +51,7 @@ var App;
                     for (var spp = 0; spp < App_1.MSAA_amount; ++spp) {
                         var hrat = (i + Math.random()) / (App_1.height - 1);
                         var wrat = (j + Math.random()) / (App_1.width - 1);
-                        var newvec = add(ld_vec, new Vec3(App_1.view_w * wrat, App_1.view_h * hrat, 0));
-                        var ray = new Ray(App_1.origin, newvec);
+                        var ray = camera.GetRay(hrat, wrat);
                         ray.dir.Normalize();
                         var col = scene.GetColor(ray, App_1.bounce_deep);
                         col.Clamp();

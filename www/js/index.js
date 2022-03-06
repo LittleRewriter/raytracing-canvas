@@ -9,6 +9,7 @@ window.onload = function () {
     loadLib("./js/framework/LogMgr.js")
     loadLib("./js/framework/Vec3.js")
     loadLib("./js/framework/Ray.js")
+    loadLib("./js/framework/Camera.js")
     loadLib("./js/framework/Hit.js")
     loadLib("./js/framework/Tools.js")
     loadLib("./js/framework/Material.js")

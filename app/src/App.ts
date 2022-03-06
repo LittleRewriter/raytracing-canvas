@@ -2,6 +2,7 @@ namespace App {
     import LogMgr = FrameWork.LogMgr;
     import Vec3 = FrameWork.Vec3;
     import Ray = FrameWork.Ray;
+    import Camera = FrameWork.Camera;
     import Sphere = FrameWork.Sphere;
     import Mirror = FrameWork.Mirror;
     import Glass = FrameWork.RealGlassMat;
@@ -38,7 +39,12 @@ namespace App {
             // set the canvas parameters
             handler.SetCanvasSize(width, height);
             handler.CreateFrame();
-            const ld_vec = minus(origin, new Vec3(view_w / 2, view_h / 2, dep));
+
+            var camera = new Camera({
+                look_origin: new Vec3(-2, 2, 1),
+                look_at: new Vec3(-1, 0, 1),
+                field_of_view: 120
+            });
 
             // create scene and add
             var scene = new Scene();
@@ -70,8 +76,7 @@ namespace App {
                     for (var spp = 0; spp < MSAA_amount; ++spp) {
                         var hrat = (i + Math.random()) / (height - 1);
                         var wrat = (j + Math.random()) / (width - 1);
-                        var newvec = add(ld_vec, new Vec3(view_w * wrat, view_h * hrat, 0));
-                        var ray = new Ray(origin, newvec);
+                        var ray = camera.GetRay(hrat, wrat);
                         ray.dir.Normalize();
                         var col = scene.GetColor(ray, bounce_deep);
                         col.Clamp();
